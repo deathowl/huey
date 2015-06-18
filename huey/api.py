@@ -116,7 +116,9 @@ class Huey(object):
                     (args, kwargs),
                     retries=retries,
                     retry_delay=retry_delay)
-                return self.enqueue(cmd)
+                enqueued = self.enqueue(cmd)
+                self.emit_task("enqueued", cmd)
+                return enqueued
 
             inner_run.call_local = func
             return inner_run
