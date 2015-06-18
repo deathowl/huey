@@ -105,7 +105,9 @@ class Huey(object):
                     retries=retries,
                     retry_delay=retry_delay,
                     task_id=task_id)
-                return self.enqueue(cmd)
+                enqueued = self.enqueue(cmd)
+                self.emit_task("enqueued", cmd)
+                return enqueued
 
             func.schedule = schedule
             func.task_class = klass
