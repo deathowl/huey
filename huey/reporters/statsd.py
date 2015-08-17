@@ -21,23 +21,23 @@ class StatsdReporter(BaseReporter):
         """
         Report that a job has been enqueued
         """
-        raise NotImplementedError
+        self.connection.incr("%s.enqueued" % queue_name)
 
     def report_task_started(self, queue_name):
         """
         Report that the execution of a job has been started
         """
-        raise NotImplementedError
+        self.connection.incr("%s.started" % queue_name)
 
     def report_task_finished(self, queue_name):
         """
         Report that the execution of a job has been finished
 
         """
-        raise NotImplementedError
+        self.connection.incr("%s.finished" % queue_name)
 
     def report_task_failed(self, queue_name):
         """
         Report that the execution of a job has failed
         """
-        raise NotImplementedError
+        self.connection.incr("%s.failed" % queue_name)
