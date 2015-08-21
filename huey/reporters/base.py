@@ -39,6 +39,12 @@ class BaseReporter(object):
         """
         raise NotImplementedError
 
+    def report_task_queued_time(self, queue_name, execution_time):
+        """
+        Report that the time spent in queue
+        """
+        raise NotImplementedError
+
     def report_task_exection_time(self, queue_name, exection_time):
         """
         Report that the execution time of a job

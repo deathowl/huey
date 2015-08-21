@@ -41,3 +41,15 @@ class StatsdReporter(BaseReporter):
         Report that the execution of a job has failed
         """
         self.connection.incr("%s.failed" % queue_name)
+
+    def report_task_queued_time(self, queue_name, runtime):
+        """
+        Report that the time spent in queue
+        """
+        self.connection.timing("%s.time.execution" % queue_name, runtime)
+
+    def report_task_execution_time(self, queue_name, runtime):
+        """
+        Report that the execution time of a job
+        """
+        self.connection.timing("%s.time.execution" % queue_name, runtime)
